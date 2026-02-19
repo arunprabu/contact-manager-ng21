@@ -1,0 +1,41 @@
+import { Component } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+
+@Component({
+  selector: 'app-menu-list',
+  imports: [RouterLink, RouterLinkActive],
+  template: `
+    <div class="hidden sm:ml-6 sm:block">
+      <div class="flex space-x-4">
+        <a
+          routerLink="/"
+          aria-current="page"
+          routerLinkActive="bg-gray-950/50 text-white"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
+          >Home</a
+        >
+        <a
+          routerLink="/concepts"
+          routerLinkActive="bg-gray-950/50 text-white"
+          class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
+          >Concepts</a
+        >
+        <a
+          routerLink="/contacts"
+          routerLinkActive="bg-gray-950/50 text-white"
+          class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
+          >Contact Manager</a
+        >
+        <a
+          routerLink="/about"
+          routerLinkActive="bg-gray-950/50 text-white"
+          class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
+          >About</a
+        >
+      </div>
+    </div>
+  `,
+  styles: ``,
+})
+export class MenuList {}
