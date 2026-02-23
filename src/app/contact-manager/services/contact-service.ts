@@ -20,4 +20,16 @@ export class ContactService {
     // 3. get the response from the REST API
     // 4. send the response back to the component
   }
+
+  addContact(contact: any) {
+    // form data from the component
+    console.log(contact);
+
+    return this.http.post('https://jsonplaceholder.typicode.com/users', contact);
+  }
+
+  getContactById(id: string | number) {
+    console.log('contact Id : ' + id);
+    return this.http.get(`https://jsonplaceholder.typicode.com/users/${id}`);
+  }
 }

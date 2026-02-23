@@ -138,3 +138,34 @@ With these steps completed, the Angular application will have fully functional r
    - @for (older version is \*ngFor)
 
 =====
+
+# Working with Forms
+
+1. Template Driven forms
+   - made with html
+   - easiest type of form
+
+   ## Disadv
+   1. Not suitable for complex form validations
+   2. Not Suitable for Unit Testing
+
+2. Reactive forms [RECOMMEND]
+   - made with HTML + TS
+   - easy
+
+   # Advantages
+   1. suitable for complex form validations
+   2. Suitable for Unit Testing
+
+===
+Reactive Forms
+
+---
+
+Step 0: Have HTML form
+Step 1: Have the HTML form equivalent in TS
+Step 2: Have the HTML input equivalents in TS
+Step 3: Patch up the HTML form with its TS equivalent
+Step 4: Patch up the HTML inputs with their TS equivalents
+Step 5: Apply validators in the form fields
+Step 6: Manage the validation messages in html

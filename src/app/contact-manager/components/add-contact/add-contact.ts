@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { ContactService } from '../../services/contact-service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-contact',
-  imports: [RouterLink],
+  imports: [RouterLink, ReactiveFormsModule, CommonModule],
   template: `
     <div class="p-6 max-w-lg mx-auto">
       <h2 class="text-xl font-semibold text-slate-900 mb-4">Add Contact</h2>
@@ -34,22 +37,26 @@ import { RouterLink } from '@angular/router';
         </a>
       </div>
 
-      <form class="space-y-4">
+      <!--Patch up the HTML form with its TS equivalent using formGroup-->
+      <form class="space-y-4" [formGroup]="addContactForm" (ngSubmit)="handleAddContact()">
         <div>
           <label class="block text-sm font-medium text-slate-700"
             >Name <span class="text-red-600">*</span></label
           >
+          <!-- Step 4: Patch up the HTML inputs with their TS equivalents using formControlName -->
           <input
-            name="name"
-            required
-            minlength="2"
+            type="text"
+            formControlName="name"
             class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
             aria-required="true"
             aria-label="Name"
           />
-          <div class="text-sm text-red-600 mt-1">
-            <div>Name is required.</div>
-          </div>
+          <!-- Step 6: Manage form validation and error messages -->
+          @if (addContactForm.get('name')?.touched && addContactForm.get('name')?.invalid) {
+            <div class="text-sm text-red-600 mt-1">
+              <div>Name is required.</div>
+            </div>
+          }
         </div>
 
         <div>
@@ -58,17 +65,21 @@ import { RouterLink } from '@angular/router';
           >
           <input
             type="email"
-            name="email"
-            required
-            email
+            formControlName="email"
             class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
             aria-required="true"
             aria-label="Email"
           />
-          <div class="text-sm text-red-600 mt-1">
-            <div>Email is required.</div>
-            <div>Please enter a valid email address.</div>
-          </div>
+          @if (addContactForm.get('email')?.touched && addContactForm.get('email')?.invalid) {
+            <div class="text-sm text-red-600 mt-1">
+              @if (addContactForm.get('email')?.errors?.['required']) {
+                <div>Email is required.</div>
+              }
+              @if (addContactForm.get('email')?.errors?.['email']) {
+                <div>Please enter a valid email address.</div>
+              }
+            </div>
+          }
         </div>
 
         <div>
@@ -77,17 +88,18 @@ import { RouterLink } from '@angular/router';
           >
           <input
             type="tel"
-            name="phone"
-            required
-            pattern="^[0-9()+-s]{7,}$"
+            formControlName="phone"
             class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
             aria-required="true"
             aria-label="Phone"
           />
-          <div class="text-sm text-red-600 mt-1">
-            <div>Phone is required.</div>
-            <div>Please enter a valid phone number.</div>
-          </div>
+          @if (addContactForm.get('phone')?.touched && addContactForm.get('phone')?.invalid) {
+            <div class="text-sm text-red-600 mt-1">
+              <div>Phone is required.</div>
+              <!-- TODO: handle pattern validation for phone number with min length and / or max length-->
+              <div>Please enter a valid phone number.</div>
+            </div>
+          }
         </div>
 
         <div class="pt-4">
@@ -100,16 +112,18 @@ import { RouterLink } from '@angular/router';
         </div>
       </form>
 
-      <div
-        role="status"
-        aria-live="polite"
-        class="mt-4 rounded-md bg-green-50 border border-green-200 px-4 py-3 text-green-800 shadow-sm flex items-start gap-3"
-      >
-        <div>
-          <p class="font-medium">Success</p>
-          <p class="text-sm">Contact added successfully.</p>
+      @if (isSaved) {
+        <div
+          role="status"
+          aria-live="polite"
+          class="mt-4 rounded-md bg-green-50 border border-green-200 px-4 py-3 text-green-800 shadow-sm flex items-start gap-3"
+        >
+          <div>
+            <p class="font-medium">Success</p>
+            <p class="text-sm">Contact added successfully.</p>
+          </div>
         </div>
-      </div>
+      }
 
       <div
         role="alert"
@@ -125,4 +139,30 @@ import { RouterLink } from '@angular/router';
   `,
   styles: ``,
 })
-export class AddContact {}
+export class AddContact {
+  // Step 1: Have the HTML form equivalent in TS
+  addContactForm!: FormGroup;
+  isSaved = false;
+
+  constructor(private contactService: ContactService) {
+    // step 1 continues...
+    this.addContactForm = new FormGroup({
+      // step 2: Have the HTML input equivalents in TS
+      name: new FormControl('', Validators.required), // Implementing validation for name field
+      email: new FormControl('', [Validators.required, Validators.email]), // Implementing validation for email field
+      phone: new FormControl('', Validators.required),
+    });
+  }
+
+  handleAddContact() {
+    // collect the submittable form data
+    console.log(this.addContactForm.value);
+
+    // 1. send the form data to the service
+    this.contactService.addContact(this.addContactForm.value).subscribe((response: any) => {
+      // 2. receive the response from the service
+      console.log('Contact added successfully', response);
+      this.isSaved = true;
+    });
+  }
+}

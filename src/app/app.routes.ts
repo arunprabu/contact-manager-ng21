@@ -12,6 +12,6 @@ export const routes: Routes = [
   { path: 'concepts', component: Concepts },
   { path: 'contacts', component: Contacts },
   { path: 'contacts/add', component: AddContact },
-  { path: 'contacts/:id', component: ContactDetails },
+  { path: 'contacts/:id', component: ContactDetails }, //  id is url param
   { path: 'about', component: About },
 ];
