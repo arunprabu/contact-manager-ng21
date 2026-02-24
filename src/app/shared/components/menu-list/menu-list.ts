@@ -33,6 +33,14 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
           class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
           >About</a
         >
+        <a
+          routerLink="/auth/login"
+          routerLinkActive="bg-gray-950/50 text-white"
+          class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
+          >Login</a
+        >
+
+        <button class="text-sm text-red-300 hover:text-red-500">Logout</button>
       </div>
     </div>
   `,
