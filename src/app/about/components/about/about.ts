@@ -6,29 +6,43 @@ import { EllipsisPipe } from '../../../shared/pipes/ellipsis-pipe';
   selector: 'app-about',
   imports: [UpperCasePipe, LowerCasePipe, DatePipe, EllipsisPipe],
   template: `
-    <h1>Pipes | Transform data in the template</h1>
-    <ul>
-      <li>
-        Without Pipe: <br />
-        {{ randomText }}
-      </li>
-      <li>Without Uppercase Pipe: <br />{{ randomText | uppercase }}</li>
-      <li>Without lowercase Pipe: <br />{{ randomText | lowercase }}</li>
-    </ul>
+    <div class="p-6">
+      <h1 class="text-3xl font-bold mb-1">Pipes</h1>
+      <p class="text-gray-600 mb-6">Transform data in the template</p>
 
-    <hr />
-    <h2>Date Pipe</h2>
-    <p>Without Date Pipe: <br />{{ today }}</p>
-    <p>With Date Pipe: <br />{{ today | date }}</p>
-    <p>With Date Pipe: <br />{{ today | date: 'shortDate' }}</p>
-    <p>With Date Pipe: <br />{{ today | date: 'dd/MM/yyyy hh:mm:ss a' }}</p>
+      <div class="space-y-6">
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Text Transformation</h2>
+          <ul class="space-y-2">
+            <li class="p-3 bg-gray-100 rounded">Without Pipe: {{ randomText }}</li>
+            <li class="p-3 bg-gray-100 rounded">Uppercase: {{ randomText | uppercase }}</li>
+            <li class="p-3 bg-gray-100 rounded">Lowercase: {{ randomText | lowercase }}</li>
+          </ul>
+        </section>
 
-    <hr />
-    <h2>Custom Pipe | Ellipsis Pipe</h2>
-    <p>Without Ellipsis Pipe: <br />{{ randomText }}</p>
-    <p>With Ellipsis Pipe: <br />{{ randomText | ellipsis }}</p>
-    <p>With Ellipsis Pipe (30 chars): <br />{{ randomText | ellipsis: 30 }}</p>
-    <p>With Ellipsis Pipe (50 chars): <br />{{ randomText | ellipsis: 50 }}</p>
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Date Pipe</h2>
+          <ul class="space-y-2">
+            <li class="p-3 bg-gray-100 rounded">Default: {{ today }}</li>
+            <li class="p-3 bg-gray-100 rounded">Date Pipe: {{ today | date }}</li>
+            <li class="p-3 bg-gray-100 rounded">Short Date: {{ today | date: 'shortDate' }}</li>
+            <li class="p-3 bg-gray-100 rounded">
+              Custom: {{ today | date: 'dd/MM/yyyy hh:mm:ss a' }}
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Ellipsis Pipe</h2>
+          <ul class="space-y-2">
+            <li class="p-3 bg-gray-100 rounded">Default: {{ randomText }}</li>
+            <li class="p-3 bg-gray-100 rounded">With Ellipsis: {{ randomText | ellipsis }}</li>
+            <li class="p-3 bg-gray-100 rounded">30 chars: {{ randomText | ellipsis: 30 }}</li>
+            <li class="p-3 bg-gray-100 rounded">50 chars: {{ randomText | ellipsis: 50 }}</li>
+          </ul>
+        </section>
+      </div>
+    </div>
   `,
   styles: ``,
 })

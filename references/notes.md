@@ -123,7 +123,9 @@ With these steps completed, the Angular application will have fully functional r
    - using Custom Event Binding
 
 3. Any to Any Component Communication
-   - Using Services, RxJS/Observables
+   - either Using Services, RxJS/Observables (complex) (or)
+   - using Signal (recommended for simpler use cases). (or)
+   - using NgRx
 
 =====
 
@@ -149,7 +151,7 @@ With these steps completed, the Angular application will have fully functional r
    1. Not suitable for complex form validations
    2. Not Suitable for Unit Testing
 
-2. Reactive forms [RECOMMEND]
+2. Reactive forms [RECOMMENDED]
    - made with HTML + TS
    - easy
 

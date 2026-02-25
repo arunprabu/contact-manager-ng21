@@ -7,6 +7,8 @@ import { AddContact } from './contact-manager/components/add-contact/add-contact
 import { ContactDetails } from './contact-manager/components/contact-details/contact-details';
 import { authGuard } from './shared/guards/auth-guard';
 import { Login } from './auth/components/login/login';
+import { Counter } from './counter/components/counter/counter';
+import { Messenger } from './messenger/components/messenger/messenger';
 
 // routing config
 export const routes: Routes = [
@@ -16,5 +18,7 @@ export const routes: Routes = [
   { path: 'contacts/add', component: AddContact },
   { path: 'contacts/:id', component: ContactDetails }, //  id is url param
   { path: 'about', component: About },
+  { path: 'counter', component: Counter },
+  { path: 'messenger', component: Messenger },
   { path: 'auth/login', component: Login },
 ];

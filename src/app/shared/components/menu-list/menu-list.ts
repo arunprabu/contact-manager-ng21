@@ -34,6 +34,18 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
           >About</a
         >
         <a
+          routerLink="/counter"
+          routerLinkActive="bg-gray-950/50 text-white"
+          class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
+          >Counter</a
+        >
+        <a
+          routerLink="/messenger"
+          routerLinkActive="bg-gray-950/50 text-white"
+          class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
+          >Messenger</a
+        >
+        <a
           routerLink="/auth/login"
           routerLinkActive="bg-gray-950/50 text-white"
           class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
