@@ -28,7 +28,7 @@ Develop E-Commerce App
 
 you should save title, description, category (in dropdown), price, image
 
-FAKE REST API:
+FAKE REST API: https://fakestoreapi.com/products
 
 1.  List Products
 2.  Add Product
